@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{polyglossia,fontspec,xcolor,metalogo}
+% To allow copying of Devanagari from pdf
+\XeTeXgenerateactualtext=1
+% englishfont, devanagarifont, vedafont
+\setmainfont{FreeSerif}
+\newcommand{\lmr}{\fontfamily{lmr}\selectfont} % Latin Modern Roman
+\defaultfontfeatures{Mapping=tex-text}
+\setmainlanguage{english}
+\setotherlanguage{sanskrit}
+\newfontfamily{\englishfont}[Scale=1.1]{FreeSerif}
+\newfontfamily{\devanagarifont}[Script=Devanagari,Scale=1]{Siddhanta}
+\newfontfamily{\vedafont}[Scale=1.2,Color=red]{Siddhanta}
+% Modified ucharclasses/sty
+\usepackage[Latin, GeneralPunctuation, DevanagariMarks, DevanagariPreMarks, DevanagariExtended, DevanagariPostMarks, VedicExtensions, SuperscriptsAndSubscripts]{ucharclasses}
+\setTransitionsForLatin{\englishfont}{}
+\setTransitionTo{GeneralPunctuation}{\englishfont}
+\setTransitionTo{DevanagariPreMarks}{\devanagarifont}
+\setTransitionTo{DevanagariPostMarks}{\devanagarifont}
+\setTransitionTo{DevanagariMarks}{\vedafont}
+\setTransitionTo{DevanagariExtended}{\vedafont}
+\setTransitionTo{VedicExtensions}{\vedafont}
+%
+\setTransitionsFor{Latin}
+  {\hyphenrules{english}\englishfont}
+  {\hyphenrules{sanskrit}\devanagarifont}
+\setTransitionsFor{Devanagari}
+  {\hyphenrules{sanskrit}\devanagarifont}
+  {\hyphenrules{english}\englishfont}
+%
+\setlength{\parindent}{0pt}
+%
+\begin{document}
+\obeylines 
+\section*{Introduction}
+This trial is to use \emph{ucharclasses.sty} to easily switch between Devanagari and Latin scripts without additional {\fontfamily{lmr}\selectfont \LaTeX} directives.
+\medskip
+यह परीक्षण लेटेक निर्देशों के बिना, आसानी से, हिन्दी और अंग्रेजी के बीच स्विच करने के लिए ucharclasses का उपयोग करता है। 
+
+\section*{Vedic Sanskrit in Devanagari Script}
+This document shows how to use the combining marks and characters from Devanagari, DevanagariExtended and VedicExtensions Unicode blocks to display the Vedic marks in red color.
+
+\medskip\hrule\medskip
+
+ओमिति॒ ब्रह्म॑ । ओमिती॒दꣳसर्वम्᳚ ।
+
+ॐ
+गं॒ध॒द्वा॒रां दु॑राध॒र्षां॒ नि॒त्यपु॑ष्टां करी॒षिणी᳚म् । 
+ई॒श्वरी॑ꣳ सर्व॑भूता॒नां॒ तामि॒होप॑ह्वये॒ श्रियम् ॥ ९॥ 
+
+\medskip\hrule\medskip
+\section*{Technical Info}
+
+This was typeset using \XeLaTeX \ \the\XeTeXversion\XeTeXrevision . A modified version of the package \emph{ucharclasses.sty} was used for automatic font switching based on Uniocde ranges.
+\end{document}
